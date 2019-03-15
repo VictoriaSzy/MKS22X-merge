@@ -1,6 +1,12 @@
+import java.util.* ;
+
 public class Merge {
   public static void main(String[] args) {
-    System.out.println() ;
+    int[] a = {1, 2, 4, 5, 6, 9} ;
+    System.out.println("a = " + Arrays.toString(a)) ;
+    int[] b = {-4, 0, 8, 25} ;
+    System.out.println("b = " + Arrays.toString(b)) ;
+    System.out.println( Arrays.toString(merge(a,b)) ) ;
   }
   /*sort the array from least to greatest value. This is a wrapper function*/
   public static void mergesort(int[]data) {
@@ -44,15 +50,34 @@ public class Merge {
   public static int[] merge(int[] a, int[] b) {
     int[] res = new int[a.length + b.length] ;
     int aIndex = 0, bIndex = 0 ;
-    for (int i = 0 ; i < res.length ; i++) {
-      if (a[aIndex] < b[bIndex]) {
+    int ind = 0 ;
+    for (int i = 0 ; i < res.length && aIndex < a.length && bIndex < b.length; i++) {
+      if (a[aIndex] <= b[bIndex]) {
         // a has the smaller element so it will go to res
         res[i] = a[aIndex] ;
         aIndex++ ;
       }
-      else if (b[bIndex] > a[aIndex]) {
+      else {
+        // b[bIndex] > a[aIndex]
         // b has the smaller element so it will go to res
-        
+        res[i] = b[bIndex] ;
+        bIndex++ ;
+      }
+      ind++ ;
+    }
+    // now we have to check whether we finished going through one of the arrays that we are merging
+    if (aIndex == a.length && bIndex != b.length) {
+      // we went through a completely and now we have to add the rest of the values (which should be in the correct increasing order)
+      while (ind < res.length && bIndex < b.length) {
+        res[ind] = b[bIndex] ;
+        bIndex++ ;
+      }
+    }
+    if (bIndex == b.length && aIndex != a.length) {
+      // adding any remaining values from a
+      while (ind < res.length && aIndex < a.length) {
+        res[ind] = a[aIndex] ;
+        aIndex++ ;
       }
     }
     return res ;

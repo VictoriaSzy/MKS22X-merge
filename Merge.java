@@ -63,12 +63,14 @@ public class Merge {
       a[i] = data[i] ;
     }
     int lenA = a.length ;
+    System.out.println("We split it into half: " + Arrays.toString(a)) ;
     mergeH(a, 0, lenA - 1) ;
     int[] b = new int[l - half] ;
     for (int x = 0 ; x < b.length ; x++) {
       b[x] = data[half + x] ;
     }
     int lenB = b.length ;
+    System.out.println("We split it into half: " + Arrays.toString(b)) ;
     mergeH(b, 0, lenB- 1) ;
     // finished creating halved arrays
     int position = 0, iA = 0, iB = 0 ;
@@ -76,20 +78,24 @@ public class Merge {
     while (position < l) {
       if (iA >= lenA) {
         // done with array a
+        //System.out.println("We finished going through array a") ;
         data[position] = b[iB] ;
         iB++ ;
       }
       else if (iB >= lenB) {
         // done with array b
+        //System.out.println("We finished going through array b") ;
         data[position] = a[iA] ;
         iA++ ;
       }
       // comparing values to see which is smaller
       else if (a[iA] <= b[iB]) {
+        //System.out.println("The value in array a is smaller than OR equal to the value in array b") ;
         data[position] = a[iA] ;
         iA++ ;
       }
       else {
+        //System.out.println("The value in array b is smaller than the value in array a") ;
         data[position] = b[iB] ;
         iB++ ;
       }

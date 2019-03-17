@@ -2,6 +2,7 @@ import java.util.* ;
 
 public class Merge {
   public static void main(String[] args) {
+    System.out.println("******************TESTING MERGE******************") ;
     int[] a = {1, 2, 4, 5, 6, 9} ;
     System.out.println("a = " + Arrays.toString(a)) ;
     int[] b = {-4, 0, 8, 25} ;
@@ -10,6 +11,10 @@ public class Merge {
   }
   /*sort the array from least to greatest value. This is a wrapper function*/
   public static void mergesort(int[]data) {
+    mergeH(data, 0, data.length - 1) ;
+  }
+  // Helper method for merge sorting that will be the recursive part
+  public static void mergeH(int[] data, int lo, int hi) {
     /* pseudocode from Mr. K's website:
     mergesort(data,lo,hi):
       if lo >= hi :
@@ -18,15 +23,21 @@ public class Merge {
       mergesort right side
       merge
     */
-    int half = (data.length - 1) / 2 ;
-    int[] a = mergeH(data, 0, half) ;
-    int[] b = mergeH(data, half + 1, data.length - 1) ;
+    if (lo >= hi) return ; // when there is only one element
+    int l = data.length ;
+    int half = (l - 1) / 2 ;
+    int[] a = new int[half] ;
+    for (int i = 0 ; i < a.length ; i++) {
+      a[i] = data[i] ;
+    }
+    mergeH(a, 0, a.length - 1) ;
+    int[] b = new int[l - half] ;
+    for (int x = 0 ; x < b.length ; x++) {
+      b[x] = data[half + x] ;
+    }
+    mergeH(b, 0, b.length - 1) ;
     data = merge(a,b) ;
-  }
-  // Helper method for merge sorting that will be the recursive part
-  public static int[] mergeH(int[] data, int lo, int hi) {
-    if (lo >= hi) return data ; // when there is only one element
-    if (data.length == 2) {
+    /*if (data.length == 2) {
       // we have 2 values to compare
       if (data[0] > data[1]) {
         // we need to flip them
@@ -34,11 +45,7 @@ public class Merge {
       }
       // after this they are in the correct order
       return data ;
-    }
-    else {
-      // data is not length 2
-      return mergeH(data, lo, hi / 2) ;
-    }
+    }*/
   }
   // helper method to move around values
   public static void swap(int a, int b, int[] data) {

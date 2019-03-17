@@ -36,6 +36,19 @@ public class Merge {
       b[x] = data[half + x] ;
     }
     mergeH(b, 0, b.length - 1) ;
+    // finished creating halved arrays
+    int position = 0, iA = 0, iB = 0 ;
+    int lenA = a.length, lenB = b.length ;
+    ////// while loop starts
+    while (position < l) {
+      if (iA >= lenA) {
+        data[position] = b[iB] ;
+        iB++ ;
+        position++ ;
+      }
+    }
+    ///////// while loop ends
+    ///////////////////////////////////////////////////////////////////////////////
     data = merge(a,b) ;
     /*if (data.length == 2) {
       // we have 2 values to compare

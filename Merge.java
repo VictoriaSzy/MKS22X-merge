@@ -2,12 +2,44 @@ import java.util.* ;
 
 public class Merge {
   public static void main(String[] args) {
-    System.out.println("******************TESTING MERGE******************") ;
+    System.out.println("Size\t\tMax Value\tMerge/builtin ratio ");
+    int[]MAX_LIST = {1000000000,500,10};
+    for(int MAX : MAX_LIST){
+      for(int size = 31250; size < 2000001; size*=2){
+        long mtime=0;
+        long btime=0;
+        //average of 5 sorts.
+        for(int trial = 0 ; trial <=5; trial++){
+          int []data1 = new int[size];
+          int []data2 = new int[size];
+          for(int i = 0; i < data1.length; i++){
+            data1[i] = (int)(Math.random()*MAX);
+            data2[i] = data1[i];
+          }
+          long t1,t2;
+          t1 = System.currentTimeMillis();
+          Merge.mergesort(data2);
+          t2 = System.currentTimeMillis();
+          mtime += t2 - t1;
+          t1 = System.currentTimeMillis();
+          Arrays.sort(data1);
+          t2 = System.currentTimeMillis();
+          btime+= t2 - t1;
+          if(!Arrays.equals(data1,data2)){
+            System.out.println("FAIL TO SORT!");
+            System.exit(0);
+          }
+        }
+        System.out.println(size +"\t\t"+MAX+"\t"+1.0*mtime/btime);
+      }
+      System.out.println();
+    }
+    /*System.out.println("******************TESTING MERGE******************") ;
     int[] a = {1, 2, 4, 5, 6, 9} ;
     System.out.println("a = " + Arrays.toString(a)) ;
     int[] b = {-4, 0, 8, 25} ;
     System.out.println("b = " + Arrays.toString(b)) ;
-    System.out.println( Arrays.toString(merge(a,b)) ) ;
+    System.out.println( Arrays.toString(merge(a,b)) ) ;*/
   }
   /*sort the array from least to greatest value. This is a wrapper function*/
   public static void mergesort(int[]data) {
@@ -25,32 +57,48 @@ public class Merge {
     */
     if (lo >= hi) return ; // when there is only one element
     int l = data.length ;
-    int half = (l - 1) / 2 ;
+    int half = l / 2 ;
     int[] a = new int[half] ;
     for (int i = 0 ; i < a.length ; i++) {
       a[i] = data[i] ;
     }
-    mergeH(a, 0, a.length - 1) ;
+    int lenA = a.length ;
+    mergeH(a, 0, lenA - 1) ;
     int[] b = new int[l - half] ;
     for (int x = 0 ; x < b.length ; x++) {
       b[x] = data[half + x] ;
     }
-    mergeH(b, 0, b.length - 1) ;
+    int lenB = b.length ;
+    mergeH(b, 0, lenB- 1) ;
     // finished creating halved arrays
     int position = 0, iA = 0, iB = 0 ;
-    int lenA = a.length, lenB = b.length ;
     ////// while loop starts
     while (position < l) {
       if (iA >= lenA) {
+        // done with array a
         data[position] = b[iB] ;
         iB++ ;
-        position++ ;
       }
+      else if (iB >= lenB) {
+        // done with array b
+        data[position] = a[iA] ;
+        iA++ ;
+      }
+      // comparing values to see which is smaller
+      else if (a[iA] <= b[iB]) {
+        data[position] = a[iA] ;
+        iA++ ;
+      }
+      else {
+        data[position] = b[iB] ;
+        iB++ ;
+      }
+      position++ ;
     }
     ///////// while loop ends
     ///////////////////////////////////////////////////////////////////////////////
-    data = merge(a,b) ;
-    /*if (data.length == 2) {
+    /*data = merge(a,b) ;
+    if (data.length == 2) {
       // we have 2 values to compare
       if (data[0] > data[1]) {
         // we need to flip them
@@ -60,7 +108,7 @@ public class Merge {
       return data ;
     }*/
   }
-  // helper method to move around values
+  /*// helper method to move around values
   public static void swap(int a, int b, int[] data) {
     int temp = data[a] ;
     data[a] = data[b] ;
@@ -101,5 +149,5 @@ public class Merge {
       }
     }
     return res ;
-  }
+  }*/
 }

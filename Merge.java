@@ -63,14 +63,14 @@ public class Merge {
       a[i] = data[i] ;
     }
     int lenA = a.length ;
-    System.out.println("We split it into half: " + Arrays.toString(a)) ;
+    //System.out.println("We split it into half: " + Arrays.toString(a)) ;
     mergeH(a, 0, lenA - 1) ;
     int[] b = new int[l - half] ;
     for (int x = 0 ; x < b.length ; x++) {
       b[x] = data[half + x] ;
     }
     int lenB = b.length ;
-    System.out.println("We split it into half: " + Arrays.toString(b)) ;
+    //System.out.println("We split it into half: " + Arrays.toString(b)) ;
     mergeH(b, 0, lenB- 1) ;
     // finished creating halved arrays
     int position = 0, iA = 0, iB = 0 ;

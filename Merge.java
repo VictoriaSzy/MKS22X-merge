@@ -2,7 +2,7 @@ import java.util.* ;
 
 public class Merge {
   public static void main(String[] args) {
-    System.out.println("Size\t\tMax Value\tMerge/builtin ratio ");
+    /*System.out.println("Size\t\tMax Value\tMerge/builtin ratio ");
     int[]MAX_LIST = {1000000000,500,10};
     for(int MAX : MAX_LIST){
       for(int size = 31250; size < 2000001; size*=2){
@@ -33,7 +33,7 @@ public class Merge {
         System.out.println(size +"\t\t"+MAX+"\t"+1.0*mtime/btime);
       }
       System.out.println();
-    }
+    }*/
     /*System.out.println("******************TESTING MERGE******************") ;
     int[] a = {1, 2, 4, 5, 6, 9} ;
     System.out.println("a = " + Arrays.toString(a)) ;

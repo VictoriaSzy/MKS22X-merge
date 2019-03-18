@@ -40,6 +40,16 @@ public class Merge {
     int[] b = {-4, 0, 8, 25} ;
     System.out.println("b = " + Arrays.toString(b)) ;
     System.out.println( Arrays.toString(merge(a,b)) ) ;*/
+    System.out.println("****************Testing mergesort****************") ;
+    int[][] p = { {2, 5, 1, 6, -4, 20, 34, 25},
+    {0, 0, 0, 0},
+    {14, 235, 15, 15, 622, 62624, 1112, 663, 732, 14683333, 889, 6343} } ;
+    for (int[] i : p) {
+      System.out.println("Previous: " + Arrays.toString(i)) ;
+      mergesort(i) ;
+      System.out.println("After mergesort, the array looks like: " + Arrays.toString(i)) ;
+      System.out.println("************************************************") ;
+    }
   }
   /*sort the array from least to greatest value. This is a wrapper function*/
   public static void mergesort(int[]data) {

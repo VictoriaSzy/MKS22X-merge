@@ -2,7 +2,7 @@ import java.util.* ;
 
 public class Merge {
   public static void main(String[] args) {
-    /*System.out.println("Size\t\tMax Value\tMerge/builtin ratio ");
+    System.out.println("Size\t\tMax Value\tMerge/builtin ratio ");
     int[]MAX_LIST = {1000000000,500,10};
     for(int MAX : MAX_LIST){
       for(int size = 31250; size < 2000001; size*=2){
@@ -33,13 +33,13 @@ public class Merge {
         System.out.println(size +"\t\t"+MAX+"\t"+1.0*mtime/btime);
       }
       System.out.println();
-    }*/
+    }
     /*System.out.println("******************TESTING MERGE******************") ;
     int[] a = {1, 2, 4, 5, 6, 9} ;
     System.out.println("a = " + Arrays.toString(a)) ;
     int[] b = {-4, 0, 8, 25} ;
     System.out.println("b = " + Arrays.toString(b)) ;
-    System.out.println( Arrays.toString(merge(a,b)) ) ;*/
+    System.out.println( Arrays.toString(merge(a,b)) ) ;
     System.out.println("****************Testing mergesort****************") ;
     int[][] p = { {2, 5, 1, 6, -4, 20, 34, 25},
     {0, 0, 0, 0},
@@ -51,6 +51,22 @@ public class Merge {
       mergesort(i) ;
       System.out.println("After mergesort, the array looks like: " + Arrays.toString(i)) ;
       System.out.println("************************************************") ;
+    }*/
+  }
+  private static void insertionsort(int[] data, int lo, int hi) {
+    // n^2 but has a low constant
+    for (int i = 1 ; i < data.length ; i++) {
+      // comparing value with value before it
+      if (data[i] < data[i - 1]) {
+        // we need to move the smaller value to the left
+        int val = data[i] ;
+        int a = 0 ;
+        for (int b = i ; val < data[b - 1] && b > 0 ; b--) {
+          if (data[b - 1] > val) data[b] = data[b - 1] ;
+          a = b ;
+        }
+        data[a] = val ;
+      }
     }
   }
   /*sort the array from least to greatest value. This is a wrapper function*/

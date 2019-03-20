@@ -58,7 +58,7 @@ public class Test {
     int [] result = Arrays.copyOf(start,start.length);
     Arrays.sort(result);
     long startTime = System.currentTimeMillis();
-    M.mergesort(result) ;
+    Merge.mergesort(result) ;
     /*
      * Test your sort here //yoursort(start);
      * Add code to switch which sort is tested by changing one of the args!

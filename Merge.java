@@ -55,20 +55,17 @@ public class Merge {
   }
   private static void insertionsort(int[] data, int lo, int hi) {
     // n^2 but has a low constant
-    for (int i = 1 ; i < data.length ; i++) {
-      // comparing value with value before it
-      if (data[i] < data[i - 1]) {
-        // we need to move the smaller value to the left
-        int val = data[i] ;
-        int a = 0 ;
-        for (int b = i ; val < data[b - 1] && b > 0 ; b--) {
-          if (data[b - 1] > val) data[b] = data[b - 1] ;
-          a = b ;
-        }
-        data[a] = val ;
+    if (hi - lo == 0) return ;
+    for (int i = lo + 1 ; i < hi + 1 ; i++) {
+      int val = data[i] ;
+      int ind = i - 1 ;
+      for (ind = i - 1 ; ind > (lo - 1) && data[ind] > val ; ind--) {
+        data[ind + 1] = data[ind] ;
       }
+      data[ind + 1] = val ;
     }
   }
+
   /*sort the array from least to greatest value. This is a wrapper function*/
   public static void mergesort(int[]data) {
     mergeH(data, 0, data.length - 1) ;
@@ -83,6 +80,10 @@ public class Merge {
       mergesort right side
       merge
     */
+    if (hi - lo < 50) {
+      insertionsort(data, lo, hi) ;
+      return ;
+    }
     if (lo >= hi) return ; // when there is only one element
     int l = data.length ;
     int half = l / 2 ;
@@ -142,7 +143,7 @@ public class Merge {
       return data ;
     }*/
   }
-  /*// helper method to move around values
+  //helper method to move around values
   public static void swap(int a, int b, int[] data) {
     int temp = data[a] ;
     data[a] = data[b] ;
@@ -183,5 +184,5 @@ public class Merge {
       }
     }
     return res ;
-  }*/
+  }
 }

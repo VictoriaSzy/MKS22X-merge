@@ -80,7 +80,7 @@ public class Merge {
       mergesort right side
       merge
     */
-    if (hi - lo < 50) {
+    if (hi - lo < 48) {
       insertionsort(data, lo, hi) ;
       return ;
     }
